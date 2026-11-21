@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATCHALOGY — Premium Matcha Culture & Discovery Platform</title>
+  <meta name="description" content="Platform digital kurasi budaya matcha Jepang premium, edukasi mendalam, panduan menyeduh, serta koleksi bubuk matcha dan peralatan tradisional." />
+
+  <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Plus Jakarta Sans (Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & THEME SYSTEM
+       ========================================================================== */
+    :root {
+      /* Core Brand Palette */
+      --deep-matcha: #344D35;
+      --dark-forest: #1C2B1D;
+      --matcha-green: #5B7E4B;
+      --matcha-vibrant: #6F995B;
+      --soft-cream: #F8F6F0;
+      --warm-beige: #EFECE2;
+      --sand-border: #DFD9C8;
+      --pure-white: #FFFFFF;
+
+      /* Semantic Tokens (Light Mode Default) */
+      --bg-primary: #F8F6F0;
+      --bg-secondary: #EFECE2;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #FFFFFF;
+      --text-primary: #1C2B1D;
+      --text-secondary: #4A5A4B;
+      --text-muted: #768477;
+      --accent-primary: #344D35;
+      --accent-secondary: #5B7E4B;
+      --border-color: rgba(52, 77, 53, 0.14);
+      --shadow-sm: 0 4px 20px rgba(28, 43, 29, 0.05);
+      --shadow-md: 0 12px 35px rgba(28, 43, 29, 0.08);
+      --shadow-lg: 0 24px 60px rgba(28, 43, 29, 0.14);
+
+      /* Typography */
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Layout & Transitions */
+      --nav-height: 82px;
+      --container-max: 1320px;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #121A13;
+      --bg-secondary: #182319;
+      --bg-card: #1E2B1F;
+      --bg-elevated: #253426;
+      --text-primary: #F2EFE6;
+      --text-secondary: #C6CEC6;
+      --text-muted: #8FA090;
+      --accent-primary: #7FA86B;
+      --accent-secondary: #98C283;
+      --border-color: rgba(242, 239, 230, 0.12);
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 12px 35px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .serif-title {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--text-primary);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition-smooth);
+    }
+
+    button {
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .section-padding {
+      padding: 115px 0;
+    }
+
+    .section-alt {
+      background-color: var(--bg-secondary);
+    }
+
+    /* Editorial Section Header */
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 60px;
+    }
+
+    .section-header.centered {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-secondary);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background-color: var(--accent-secondary);
+    }
+
+    .section-header.centered .eyebrow::after {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background-color: var(--accent-secondary);
+    }
+
+    .section-title {
+      font-size: clamp(2.3rem, 4vw, 3.4rem);
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 30px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary {
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      border: 1px solid var(--deep-matcha);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--dark-forest);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(52, 77, 53, 0.28);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-primary);
+      background-color: var(--accent-primary);
+      color: #F8F6F0;
+      transform: translateY(-2px);
+    }
+
+    .btn-light {
+      background-color: #F8F6F0;
+      color: #1C2B1D;
+      border: 1px solid #F8F6F0;
+    }
+
+    .btn-light:hover {
+      background-color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-ghost-light {
+      background-color: rgba(248, 246, 240, 0.12);
+      backdrop-filter: blur(8px);
+      color: #F8F6F0;
+      border: 1px solid rgba(248, 246, 240, 0.4);
+    }
+
+    .btn-ghost-light:hover {
+      background-color: rgba(248, 246, 240, 0.24);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. LOADING SCREEN & SCROLL PROGRESS
+       ========================================================================== */
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      background-color: var(--dark-forest);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #F8F6F0;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    #page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-emblem {
+      width: 56px;
+      height: 56px;
+      border: 1.5px solid rgba(248, 246, 240, 0.2);
+      border-top-color: #98C283;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+    }
+
+    .loader-brand {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      letter-spacing: 0.28em;
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--matcha-green), #98C283);
+      z-index: 1002;
+      transition: width 0.1s ease-out;
+    }
+
+    /* ==========================================================================
+       4. SMART STICKY NAVBAR (HIDE ON SCROLL DOWN, REVEAL ON SCROLL UP)
+       ========================================================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      z-index: 1000;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, box-shadow 0.35s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar.nav-hidden {
+      transform: translateY(-100%);
+    }
+
+    .navbar.nav-transparent {
+      background-color: transparent;
+      color: #F8F6F0;
+    }
+
+    .navbar.nav-solid {
+      background-color: rgba(248, 246, 240, 0.92);
+      backdrop-filter: blur(14px);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    [data-theme="dark"] .navbar.nav-solid {
+      background-color: rgba(18, 26, 19, 0.92);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-family: var(--font-serif);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      position: relative;
+      padding: 6px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      background-color: rgba(127, 168, 107, 0.18);
+    }
+
+    .lang-toggle {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      opacity: 0.85;
+    }
+
+    .lang-toggle:hover {
+      opacity: 1;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background-color: var(--matcha-green);
+      color: #FFFFFF;
+      font-size: 0.68rem;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      background-color: var(--dark-forest);
+      color: #F8F6F0;
+      z-index: 1100;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .mobile-nav-list a {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION (WITH VIDEO PLACEHOLDER & OVERLAY)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      color: #F8F6F0;
+      overflow: hidden;
+      background-color: var(--dark-forest);
+    }
+
+    /* ==========================================================================
+       [MEDIA PLACEHOLDER - HERO VIDEO]
+       Ganti atribut src pada <source> atau poster di bawah ini dengan file video
+       matcha milik Anda sendiri (misal: assets/video/matcha-whisking.mp4).
+       ========================================================================== */
+    .hero-video-wrapper {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.08);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        115deg,
+        rgba(20, 32, 21, 0.86) 0%,
+        rgba(28, 43, 29, 0.65) 52%,
+        rgba(28, 43, 29, 0.42) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding-top: 70px;
+      animation: heroReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(32px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #B8D8A8;
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.9rem, 6vw, 5.1rem);
+      font-weight: 500;
+      line-height: 1.06;
+      color: #F8F6F0;
+      margin-bottom: 24px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: #B8D8A8;
+    }
+
+    .hero-desc {
+      font-size: 1.12rem;
+      color: rgba(248, 246, 240, 0.86);
+      max-width: 610px;
+      margin-bottom: 38px;
+      font-weight: 300;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .hero-meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(248, 246, 240, 0.18);
+    }
+
+    .hero-meta-item span {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248, 246, 240, 0.65);
+    }
+
+    .hero-meta-item strong {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #F8F6F0;
+    }
+
+    /* ==========================================================================
+       6. ABOUT MATCHALOGY (EDITORIAL SPLIT)
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-main-img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-floating-card {
+      position: absolute;
+      bottom: -28px;
+      right: -28px;
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      padding: 28px 32px;
+      border-radius: var(--radius-md);
+      max-width: 280px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-floating-card p {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .about-floating-card span {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #B8D8A8;
+    }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .pillar-item h4 {
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      color: var(--accent-primary);
+    }
+
+    .pillar-item p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       7. MATCHA KNOWLEDGE (INTERACTIVE TABS + CARDS + ACCORDION)
+       ========================================================================== */
+    .knowledge-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .k-tab-btn {
+      padding: 11px 22px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+
+    .k-tab-btn.active, .k-tab-btn:hover {
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      border-color: var(--deep-matcha);
+    }
+
+    .k-panel {
+      display: none;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 44px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeSlide 0.45s ease;
+    }
+
+    .k-panel.active {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .k-panel-img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    .k-panel h3 {
+      font-size: 2.1rem;
+      margin-bottom: 16px;
+    }
+
+    .k-panel p {
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .comparison-table th {
+      color: var(--accent-primary);
+      font-weight: 600;
+      background-color: var(--bg-secondary);
+    }
+
+    .knowledge-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .k-mini-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: var(--transition-smooth);
+    }
+
+    .k-mini-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .k-mini-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background-color: rgba(91, 126, 75, 0.14);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .k-mini-card h4 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .k-mini-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       8. MATCHA GRADE (3 TIERS SHOWCASE)
+       ========================================================================== */
+    .grades-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .grade-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .grade-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .grade-card.featured {
+      border: 1.5px solid var(--matcha-green);
+      position: relative;
+    }
+
+    .grade-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .grade-body {
+      padding: 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .grade-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--matcha-green);
+      margin-bottom: 8px;
+    }
+
+    .grade-body h3 {
+      font-size: 1.95rem;
+      margin-bottom: 12px;
+    }
+
+    .grade-body p {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+    }
+
+    .grade-specs {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.86rem;
+    }
+
+    .grade-specs div {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .grade-specs span:first-child {
+      color: var(--text-muted);
+    }
+
+    .grade-specs span:last-child {
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       9. MATCHA COLLECTION (FILTERABLE & SORTABLE CATALOG)
+       ========================================================================== */
+    .catalog-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      padding: 18px 24px;
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid transparent;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-pill.active, .filter-pill:hover {
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+    }
+
+    .sort-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+
+    .sort-select {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .product-media {
+      position: relative;
+      height: 270px;
+      overflow: hidden;
+      background-color: var(--bg-secondary);
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-media img {
+      transform: scale(1.06);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    .product-info {
+      padding: 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-cat {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-secondary);
+      margin-bottom: 6px;
+    }
+
+    .product-title {
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .product-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .product-price {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-sm {
+      padding: 9px 15px;
+      font-size: 0.8rem;
+      border-radius: 999px;
+    }
+
+    /* ==========================================================================
+       10. MATCHA BREWING GUIDE & INTERACTIVE TOOLS
+       ========================================================================== */
+    .brew-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .brew-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .brew-img {
+      width: 100%;
+      height: 410px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    .brew-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .metric-box {
+      background-color: var(--bg-secondary);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+    }
+
+    .metric-box span {
+      display: block;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .metric-box strong {
+      font-size: 1.05rem;
+      color: var(--accent-primary);
+    }
+
+    .brew-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .brew-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Interactive Matcha Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    .tool-box {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tool-box h3 {
+      font-size: 1.65rem;
+      margin-bottom: 10px;
+    }
+
+    .tool-box p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.92rem;
+    }
+
+    .calc-result {
+      background-color: var(--bg-secondary);
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .calc-result strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      color: var(--accent-primary);
+    }
+
+    .timer-display {
+      font-family: var(--font-serif);
+      font-size: 3.4rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 18px;
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      margin: 16px 0;
+      color: var(--accent-primary);
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .temp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .temp-item {
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .temp-badge {
+      font-weight: 700;
+      color: var(--accent-primary);
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================================================
+       11. MATCHA CULTURE & TERROIR (UJI & NISHIO)
+       ========================================================================== */
+    .culture-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .culture-grid-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .culture-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .culture-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .culture-card-body {
+      padding: 22px;
+    }
+
+    .culture-card-body h4 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+    }
+
+    .culture-card-body p {
+      font-size: 0.87rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       12. MATCHA GALLERY (EDITORIAL GRID + LIGHTBOX)
+       ========================================================================== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 240px;
+      gap: 18px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.07);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(20, 32, 21, 0.82), transparent 60%);
+      color: #F8F6F0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       13. MATCHA SHOP & CHECKOUT SECTION
+       ========================================================================== */
+    .shop-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .cart-panel, .checkout-panel {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-item-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cart-item-img {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    .qty-control {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .qty-control button {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .qty-control span {
+      padding: 0 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 16px;
+      margin-top: 16px;
+      border-top: 1px solid var(--border-color);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+    }
+
+    .sim-note {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background-color: var(--bg-secondary);
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      margin-top: 14px;
+    }
+
+    /* ==========================================================================
+       14. FAQ ACCORDION & CONTACT
+       ========================================================================== */
+    .faq-list {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 28px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 260px;
+      padding: 0 28px 24px;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 56px;
+    }
+
+    .contact-info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .contact-card {
+      display: flex;
+      gap: 16px;
+      padding: 20px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+    }
+
+    /* ==========================================================================
+       15. FOOTER
+       ========================================================================== */
+    .footer {
+      background-color: var(--dark-forest);
+      color: #EFECE2;
+      padding: 80px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 44px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(239, 236, 226, 0.14);
+    }
+
+    .footer h4 {
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: rgba(239, 236, 226, 0.75);
+    }
+
+    .footer-links a:hover {
+      color: #B8D8A8;
+    }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.84rem;
+      color: rgba(239, 236, 226, 0.65);
+    }
+
+    /* ==========================================================================
+       16. MODALS, SEARCH OVERLAY, TOAST & BACK TO TOP
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(15, 24, 16, 0.78);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      border-radius: var(--radius-lg);
+      max-width: 760px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 36px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      animation: fadeSlide 0.35s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quick-view-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .quick-view-grid img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    /* Search Modal Results */
+    .search-results-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    .search-result-item {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .search-result-item:hover {
+      background-color: rgba(91, 126, 75, 0.2);
+    }
+
+    /* Toast Notification */
+    #toast-container {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background-color: var(--dark-forest);
+      color: #F8F6F0;
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      border-left: 4px solid #98C283;
+      animation: fadeSlide 0.3s ease;
+    }
+
+    /* Back to Top */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--deep-matcha);
+      color: #F8F6F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-smooth);
+      z-index: 990;
+    }
+
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #back-to-top:hover {
+      transform: translateY(-4px);
+      background-color: var(--dark-forest);
+    }
+
+    /* ==========================================================================
+       17. RESPONSIVE BREAKPOINTS
+       ========================================================================== */
+    @media (max-width: 1100px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .about-grid, .k-panel.active, .brew-card, .shop-layout, .contact-grid, .culture-showcase {
+        grid-template-columns: 1fr;
+      }
+      .knowledge-cards-grid, .culture-grid-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grades-grid, .products-grid, .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .about-floating-card {
+        position: static;
+        margin-top: 18px;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .section-padding { padding: 78px 0; }
+      .grades-grid, .products-grid, .tools-grid, .knowledge-cards-grid, .culture-grid-cards, .footer-grid, .quick-view-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 180px;
+      }
+      .about-pillars {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="page-loader">
+    <div class="loader-emblem"></div>
+    <div class="loader-brand">MATCHALOGY</div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Smart Sticky Navigation -->
+  <header class="navbar nav-transparent" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo">
+        <span class="brand-mark">茶</span>
+        <span>MATCHALOGY</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#about" data-i18n="nav_about">Tentang</a>
+        <a href="#knowledge" data-i18n="nav_knowledge">Pengetahuan</a>
+        <a href="#grades" data-i18n="nav_grades">Tingkatan</a>
+        <a href="#collection" data-i18n="nav_collection">Koleksi</a>
+        <a href="#brewing" data-i18n="nav_brewing">Panduan Seduh</a>
+        <a href="#culture" data-i18n="nav_culture">Budaya</a>
+        <a href="#gallery" data-i18n="nav_gallery">Galeri</a>
+        <a href="#contact" data-i18n="nav_contact">Kontak</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="open-search-btn" aria-label="Cari">
+          <i data-lucide="search" size="19"></i>
+        </button>
+        <button class="icon-btn" id="theme-toggle-btn" aria-label="Ganti Tema">
+          <i data-lucide="moon" size="19" id="theme-icon"></i>
+        </button>
+        <button class="lang-toggle" id="lang-toggle-btn">ID / EN</button>
+        <a href="#shop" class="icon-btn" aria-label="Keranjang Belanja">
+          <i data-lucide="shopping-bag" size="19"></i>
+          <span class="cart-badge" id="nav-cart-count">0</span>
+        </a>
+        <button class="icon-btn mobile-menu-btn" id="open-mobile-menu" aria-label="Menu">
+          <i data-lucide="menu" size="22"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <aside class="mobile-drawer" id="mobile-drawer">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span class="brand-logo" style="font-size:1.4rem;">MATCHALOGY</span>
+      <button class="icon-btn" id="close-mobile-menu"><i data-lucide="x" size="26"></i></button>
+    </div>
+    <ul class="mobile-nav-list">
+      <li><a href="#about" class="mobile-nav-link">Tentang Kami</a></li>
+      <li><a href="#knowledge" class="mobile-nav-link">Matcha Knowledge</a></li>
+      <li><a href="#grades" class="mobile-nav-link">Matcha Grade</a></li>
+      <li><a href="#collection" class="mobile-nav-link">Koleksi & Produk</a></li>
+      <li><a href="#brewing" class="mobile-nav-link">Panduan Seduh & Tools</a></li>
+      <li><a href="#culture" class="mobile-nav-link">Budaya & Terroir</a></li>
+      <li><a href="#shop" class="mobile-nav-link">Keranjang & Pemesanan</a></li>
+    </ul>
+    <p style="font-size:0.82rem; opacity:0.7;">© 2026 MATCHALOGY — Kyoto & Jakarta</p>
+  </aside>
+
+  <!-- ========================================================================
+       A. HERO SECTION
+       ======================================================================== -->
+  <section class="hero" id="hero">
+    <!--
+      ========================================================================
+      PLACEHOLDER VIDEO HERO:
+      Ganti URL di bawah ini dengan path video lokal Anda (contoh: "video/matcha-hero.mp4").
+      Pastikan video menampilkan bubuk matcha, proses pengocokan chasen, atau kebun teh hijau.
+      ========================================================================
+    -->
+    <div class="hero-video-wrapper">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=1920&q=85"
+      >
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-pouring-hot-water-into-a-cup-of-tea-42886-large.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag" data-i18n="hero_tag">Uji & Nishio Single-Origin Archive</div>
+        <h1 class="hero-title" data-i18n="hero_title">
+          Seni Ketelitian dalam Setiap <em>Serbuk Hijau</em>
+        </h1>
+        <p class="hero-desc" data-i18n="hero_desc">
+          MATCHALOGY adalah platform kurasi budaya teh hijau Jepang yang menjembatani tradisi berabad-abad dari kebun teduh Uji dengan ritual gaya hidup modern yang tenang dan bermakna.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#knowledge" class="btn btn-light">
+            <span data-i18n="hero_btn_explore">Explore Matcha</span>
+            <i data-lucide="arrow-down-right" size="18"></i>
+          </a>
+          <a href="#collection" class="btn btn-ghost-light">
+            <span data-i18n="hero_btn_collection">Discover Collection</span>
+          </a>
+        </div>
+
+        <div class="hero-meta-bar">
+          <div class="hero-meta-item">
+            <span>Terroir Utama</span>
+            <strong>Uji, Kyoto & Nishio</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span>Proses Penggilingan</span>
+            <strong>Ishiusu Stone-Milled</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span>Panen Pertama</span>
+            <strong>Ichibancha Spring Harvest</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       B. ABOUT MATCHALOGY
+       ======================================================================== -->
+  <section class="section-padding" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <!-- PLACEHOLDER GAMBAR ABOUT: Mangkuk Chawan dengan Matcha Berbusa Halus -->
+          <img
+            src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=1000&q=85"
+            alt="Semangkuk matcha hijau pekat di atas meja kayu minimalis"
+            class="about-main-img"
+          />
+          <div class="about-floating-card">
+            <p>“Ichigo Ichie — Satu pertemuan, satu kesempatan yang tak terulang.”</p>
+            <span>Filosofi Chado Jepang</span>
+          </div>
+        </div>
+
+        <div>
+          <span class="eyebrow" data-i18n="about_eyebrow">Tentang MATCHALOGY</span>
+          <h2 class="section-title" data-i18n="about_title">Menghadirkan Ketenangan Melalui Keaslian Leaf-to-Bowl</h2>
+          <p style="color:var(--text-secondary); margin-bottom:18px;">
+            MATCHALOGY lahir dari keyakinan bahwa menikmati matcha bukan sekadar rutinitas konsumsi kafein, melainkan bentuk apresiasi terhadap keahlian agronomi Jepang, kesabaran waktu, dan keseimbangan rasa umami alami.
+          </p>
+          <p style="color:var(--text-secondary);">
+            Kami mengkurasi daun Tencha pilihan yang dinaungi dari sinar matahari selama 20 hingga 30 hari sebelum panen musim semi, kemudian digiling perlahan menggunakan batu granit untuk menghasilkan partikel mikroskopis yang lembut di langit-langit mulut.
+          </p>
+
+          <div class="about-pillars">
+            <div class="pillar-item">
+              <h4>01. Kemurnian Kultivar</h4>
+              <p>Mengutamakan kultivar Samidori, Okumidori, dan Yabukita tanpa pemanis maupun pewarna tambahan.</p>
+            </div>
+            <div class="pillar-item">
+              <h4>02. Edukasi Terbuka</h4>
+              <p>Membekali penikmat pemula hingga praktisi teh dengan panduan presisi rasio, suhu, dan teknik seduh.</p>
+            </div>
+            <div class="pillar-item">
+              <h4>03. Ritme Gaya Hidup</h4>
+              <p>Kombinasi L-Theanine dan kafein alami menghadirkan fokus mental yang jernih tanpa rasa gelisah.</p>
+            </div>
+            <div class="pillar-item">
+              <h4>04. Akses Kurasi</h4>
+              <p>Tersedia untuk pengiriman tersegel dingin maupun pengambilan langsung di ruang cicip offline kami.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       C. MATCHA KNOWLEDGE (INTERACTIVE ENCYCLOPEDIA)
+       ======================================================================== -->
+  <section class="section-padding section-alt" id="knowledge">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Matcha Knowledge Center</span>
+        <h2 class="section-title">Memahami Esensi Matcha Secara Mendalam</h2>
+        <p class="section-subtitle">
+          Jelajahi sejarah, proses agronomi, perbedaan mendasar dengan teh hijau biasa, hingga cara mengenali kualitas matcha autentik.
+        </p>
+      </div>
+
+      <!-- Interactive Tabs -->
+      <div class="knowledge-tabs" role="tablist">
+        <button class="k-tab-btn active" data-ktab="what">Apa Itu Matcha?</button>
+        <button class="k-tab-btn" data-ktab="history">Sejarah di Jepang</button>
+        <button class="k-tab-btn" data-ktab="process">Proses Produksi</button>
+        <button class="k-tab-btn" data-ktab="diff">Matcha vs Green Tea</button>
+        <button class="k-tab-btn" data-ktab="types">Jenis & Kultivar</button>
+      </div>
+
+      <!-- Tab Panels -->
+      <div class="k-panel active" id="ktab-what">
+        <div>
+          <h3>Apa Itu Matcha?</h3>
+          <p>
+            Matcha (抹茶) secara harfiah berarti "teh yang digiling". Berbeda dari teh seduh konvensional di mana daun direndam lalu dibuang ampasnya, matcha dibuat dari daun teh hijau <strong>Tencha</strong> yang digiling menjadi bubuk sehalus 5–10 mikron sehingga seluruh daunnya larut dan dikonsumsi utuh.
+          </p>
+          <p>
+            Konsumsi daun utuh ini membuat tubuh menyerap konsentrasi antioksidan, asam amino L-Theanine, dan klorofil dalam kadar yang jauh lebih tinggi dibandingkan seduhan teh biasa.
+          </p>
+        </div>
+        <!-- PLACEHOLDER GAMBAR KNOWLEDGE 1 -->
+        <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85" alt="Bubuk matcha hijau cerah di atas sendok bambu chashaku" class="k-panel-img" />
+      </div>
+
+      <div class="k-panel" id="ktab-history">
+        <div>
+          <h3>Jejak Sejarah Matcha di Jepang</h3>
+          <p>
+            Teknik menggiling teh kukus menjadi bubuk berawal pada masa Dinasti Song di Tiongkok sebelum dibawa ke Jepang pada tahun 1191 oleh biksu Zen <strong>Eisai</strong>. Awalnya digunakan untuk membantu meditasi panjang di kuil-kuil Zen karena efek fokusnya yang menenangkan.
+          </p>
+          <p>
+            Pada abad ke-16, master teh <strong>Sen no Rikyū</strong> menyempurnakan ritual penyajian matcha menjadi seni upacara teh Jepang (<em>Chanoyu</em>) yang berlandaskan prinsip harmoni (Wa), rasa hormat (Kei), kemurnian (Sei), dan ketenangan (Jaku).
+          </p>
+        </div>
+        <!-- PLACEHOLDER GAMBAR KNOWLEDGE 2 -->
+        <img src="https://images.unsplash.com/photo-1545048702-79362596cdc9?auto=format&fit=crop&w=900&q=85" alt="Peralatan upacara teh tradisional Jepang" class="k-panel-img" />
+      </div>
+
+      <div class="k-panel" id="ktab-process">
+        <div>
+          <h3>Dari Kebun Teduh ke Batu Granit</h3>
+          <p>
+            <strong>1. Tana Shading (20–30 Hari):</strong> Tanaman teh ditutup tirai hitam sebelum panen untuk memblokir hingga 90% sinar matahari. Daun memproduksi klorofil berlebih dan mempertahankan L-Theanine agar tidak berubah menjadi katekin yang pahit.
+          </p>
+          <p>
+            <strong>2. Pengukusan & Pengeringan Tencha:</strong> Daun dipetik, dikukus singkat untuk mencegah oksidasi, lalu dikeringkan tanpa digulung. Batang dan tulang daun dipisahkan hingga menyisakan daging daun murni (Tencha).
+          </p>
+          <p>
+            <strong>3. Penggilingan Ishiusu:</strong> Tencha digiling menggunakan penggiling batu granit berkecepatan lambat—hanya menghasilkan sekitar 30–40 gram bubuk per jam agar gesekan panas tidak merusak aroma.
+          </p>
+        </div>
+        <!-- PLACEHOLDER GAMBAR KNOWLEDGE 3 -->
+        <img src="https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?auto=format&fit=crop&w=900&q=85" alt="Perkebunan teh hijau Jepang yang subur" class="k-panel-img" />
+      </div>
+
+      <div class="k-panel" id="ktab-diff">
+        <div>
+          <h3>Perbedaan Matcha dan Green Tea Biasa</h3>
+          <p>Meski berasal dari tanaman yang sama (<em>Camellia sinensis</em>), budidaya dan cara konsumsinya sangat berbeda:</p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Aspek</th>
+                <th>Matcha Autentik</th>
+                <th>Green Tea (Sencha)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Budidaya</td>
+                <td>Dinaungi (Shaded) 3–4 minggu</td>
+                <td>Terkena sinar matahari penuh</td>
+              </tr>
+              <tr>
+                <td>Bentuk</td>
+                <td>Bubuk mikro hasil batu granit</td>
+                <td>Daun utuh yang dikeringkan</td>
+              </tr>
+              <tr>
+                <td>Konsumsi</td>
+                <td>Daun dikonsumsi 100% terlarut</td>
+                <td>Hanya air ekstraksi seduhan</td>
+              </tr>
+              <tr>
+                <td>Profil Rasa</td>
+                <td>Umami pekat, manis lembut, creamy</td>
+                <td>Segar, ringan, sedikit sepat</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- PLACEHOLDER GAMBAR KNOWLEDGE 4 -->
+        <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=85" alt="Perbandingan warna hijau giok matcha" class="k-panel-img" />
+      </div>
+
+      <div class="k-panel" id="ktab-types">
+        <div>
+          <h3>Jenis Matcha & Kultivar Unggulan</h3>
+          <p>
+            <strong>Usucha (Thin Tea):</strong> Matcha bertekstur ringan dan berbusa lembut dengan rasio air lebih banyak, ideal untuk dinikmati sehari-hari.
+          </p>
+          <p>
+            <strong>Koicha (Thick Tea):</strong> Menggunakan daun dari pohon teh berusia di atas 30 tahun dengan rasio bubuk tinggi dan sedikit air, menghasilkan tekstur kental menyerupai madu dengan rasa umami yang sangat dalam tanpa rasa pahit.
+          </p>
+          <p>
+            <strong>Kultivar Populer:</strong> <em>Samidori</em> (aroma floral elegan), <em>Okumidori</em> (warna hijau zamrud pekat dan rasa lembut), serta <em>Gokou</em> (karakter umami kompleks).
+          </p>
+        </div>
+        <!-- PLACEHOLDER GAMBAR KNOWLEDGE 5 -->
+        <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=900&q=85" alt="Tekstur lembut seduhan matcha" class="k-panel-img" />
+      </div>
+
+      <!-- 4 Core Pillar Cards: Selecting, Benefits, Quality Tiers, Storage -->
+      <div class="knowledge-cards-grid">
+        <div class="k-mini-card">
+          <div class="k-mini-icon"><i data-lucide="eye" size="22"></i></div>
+          <h4>Cara Memilih Kualitas</h4>
+          <p>Perhatikan warna hijau giok cerah (bukan kekuningan), tekstur sangat halus saat digosok di jari, dan aroma segar rumput laut manis.</p>
+        </div>
+        <div class="k-mini-card">
+          <div class="k-mini-icon"><i data-lucide="sparkles" size="22"></i></div>
+          <h4>Kandungan & Manfaat</h4>
+          <p>Kaya EGCG (antioksidan), L-Theanine untuk ketenangan fokus, klorofil detoksifikasi, serta energi stabil selama 4–6 jam.</p>
+        </div>
+        <div class="k-mini-card">
+          <div class="k-mini-icon"><i data-lucide="award" size="22"></i></div>
+          <h4>Indikator Panen</h4>
+          <p>Panen pertama musim semi (Ichibancha) menyimpan nutrisi tertinggi dan rasa manis alami dibandingkan panen musim panas.</p>
+        </div>
+        <div class="k-mini-card">
+          <div class="k-mini-icon"><i data-lucide="snowflake" size="22"></i></div>
+          <h4>Cara Penyimpanan</h4>
+          <p>Simpan dalam kaleng kedap udara dan tidak tembus cahaya di dalam lemari es (suhu 2–5°C), habiskan dalam 4–6 minggu setelah dibuka.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       D. MATCHA GRADE
+       ======================================================================== -->
+  <section class="section-padding" id="grades">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="eyebrow">Classification System</span>
+        <h2 class="section-title">Tingkatan Kualitas Matcha</h2>
+        <p class="section-subtitle">
+          Memahami klasifikasi matcha membantu Anda memilih karakter rasa yang paling tepat untuk ritual minum murni maupun kreasi kuliner.
+        </p>
+      </div>
+
+      <div class="grades-grid">
+        <!-- Ceremonial -->
+        <article class="grade-card featured">
+          <!-- PLACEHOLDER GAMBAR GRADE 1 -->
+          <img src="https://images.unsplash.com/photo-1582793988951-9aed5509eb97?auto=format&fit=crop&w=800&q=85" alt="Ceremonial Grade Matcha" class="grade-img" />
+          <div class="grade-body">
+            <span class="grade-badge">Highest Tier • Ichibancha</span>
+            <h3>Ceremonial Grade</h3>
+            <p>
+              Dihasilkan dari pucuk daun termuda panen pertama musim semi. Memiliki warna hijau zamrud menyala, aroma manis lembut, dan rasa umami murni tanpa astringensi.
+            </p>
+            <div class="grade-specs">
+              <div><span>Penggunaan</span><span>Usucha & Koicha (Air Saja)</span></div>
+              <div><span>Warna</span><span>Vibrant Jade Green</span></div>
+              <div><span>Profil Rasa</span><span>Sweet Umami, Creamy</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Premium -->
+        <article class="grade-card">
+          <!-- PLACEHOLDER GAMBAR GRADE 2 -->
+          <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=85" alt="Premium Daily Grade Matcha" class="grade-img" />
+          <div class="grade-body">
+            <span class="grade-badge">Daily Ritual Tier</span>
+            <h3>Premium Grade</h3>
+            <p>
+              Keseimbangan sempurna antara umami lembut dan karakter teh yang tegas. Dirancang untuk dinikmati setiap hari baik secara tradisional maupun sebagai matcha latte artisan.
+            </p>
+            <div class="grade-specs">
+              <div><span>Penggunaan</span><span>Daily Usucha & Artisanal Latte</span></div>
+              <div><span>Warna</span><span>Deep Forest Emerald</span></div>
+              <div><span>Profil Rasa</span><span>Balanced Umami & Crisp</span></div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Culinary -->
+        <article class="grade-card">
+          <!-- PLACEHOLDER GAMBAR GRADE 3 -->
+          <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=800&q=85" alt="Culinary Grade Matcha" class="grade-img" />
+          <div class="grade-body">
+            <span class="grade-badge">Gastronomy & Patisserie</span>
+            <h3>Culinary Grade</h3>
+            <p>
+              Dipanen pada tahap daun yang lebih matang dengan karakter rasa teh hijau yang berani dan sedikit astringen sehingga tetap menonjol saat dipadukan dengan susu, cokelat putih, atau dipanggang.
+            </p>
+            <div class="grade-specs">
+              <div><span>Penggunaan</span><span>Bakery, Gelato, Patisserie</span></div>
+              <div><span>Warna</span><span>Rich Olive Green</span></div>
+              <div><span>Profil Rasa</span><span>Bold, Robust Tea Notes</span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       E. MATCHA COLLECTION (FILTERABLE CATALOG)
+       ======================================================================== -->
+  <section class="section-padding section-alt" id="collection">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Curated Apothecary</span>
+        <h2 class="section-title">Koleksi Matcha & Peralatan Tradisional</h2>
+        <p class="section-subtitle">
+          Setiap kaleng dikemas dalam tin kedap udara berlapis ganda langsung setelah penggilingan untuk menjaga kesegaran aroma.
+        </p>
+      </div>
+
+      <!-- Filter & Sort Bar -->
+      <div class="catalog-controls">
+        <div class="filter-pills" id="category-filters">
+          <button class="filter-pill active" data-filter="all">Semua Produk</button>
+          <button class="filter-pill" data-filter="Ceremonial">Ceremonial</button>
+          <button class="filter-pill" data-filter="Premium">Premium</button>
+          <button class="filter-pill" data-filter="Culinary">Culinary</button>
+          <button class="filter-pill" data-filter="Utensils">Peralatan</button>
+        </div>
+
+        <div class="sort-box">
+          <label for="price-sort">Urutkan:</label>
+          <select id="price-sort" class="sort-select">
+            <option value="featured">Unggulan</option>
+            <option value="low-high">Harga: Terendah ke Tertinggi</option>
+            <option value="high-low">Harga: Tertinggi ke Terendah</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Dynamic Product Grid -->
+      <div class="products-grid" id="products-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       G & H. MATCHA BREWING GUIDE & INTERACTIVE TOOLS
+       ======================================================================== -->
+  <section class="section-padding" id="brewing">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Brewing Mastery</span>
+        <h2 class="section-title">Panduan Menyeduh & Kalkulator Presisi</h2>
+        <p class="section-subtitle">
+          Kuasai teknik mengocok matcha agar menghasilkan busa mikro lembut tanpa gumpalan, lengkap dengan pengatur waktu dan kalkulator rasio.
+        </p>
+      </div>
+
+      <!-- Brewing Tabs -->
+      <div class="brew-tabs" id="brew-tabs">
